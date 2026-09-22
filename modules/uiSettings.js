@@ -246,6 +246,34 @@ function uiGenerateButtonSettings(userSettings) {
     });
 }
 
+function uiUpdateDeviceModeOptions(userSettings) {
+    const elementDeviceMode = document.getElementById("dropdown-deviceMode");
+    if (!elementDeviceMode) {
+        console.warn("Device mode dropdown not found.");
+        return;
+    }
+
+    const options = userSettings.getDeviceModeOptions(userSettings.maxGamepads);
+
+    elementDeviceMode.innerHTML = "";
+
+    options.fields.forEach(field => {
+        const optionElement = document.createElement("option");
+        optionElement.value = field.value;
+        optionElement.textContent = field.label;
+        elementDeviceMode.appendChild(optionElement);
+    });
+
+    // Preserve the mode reported by the firmware if it is available.
+    const modeExists = options.fields.some(
+        field => field.value === userSettings.deviceMode
+    );
+
+    if (modeExists) {
+        elementDeviceMode.value = userSettings.deviceMode;
+    }
+}
+
 function uiSetupGeneralSettings(userSettings) {
     const elementProfileId = document.getElementById("dropdown-profileId");
     if (!elementProfileId) {
@@ -294,25 +322,16 @@ function uiSetupGeneralSettings(userSettings) {
     });
 
     const elementDeviceMode = document.getElementById("dropdown-deviceMode");
-    if (!elementDeviceMode) {
-        console.warn("Device mode dropdown not found.");
-        return;
-    }
+	if (!elementDeviceMode) {
+		console.warn("Device mode dropdown not found.");
+		return;
+	}
 
-    UserSettings.DEVICE_MODE_OPTIONS.fields.forEach(field => {
-        const optionElement = document.createElement("option");
-        optionElement.value = field.value;
-        optionElement.textContent = field.label;
-        elementDeviceMode.appendChild(optionElement);
+	uiUpdateDeviceModeOptions(userSettings);
 
-        if (field.value === userSettings.deviceMode) {
-            optionElement.selected = true;
-        }
-    });
-
-    elementDeviceMode.addEventListener("change", () => {
-        userSettings.deviceMode = parseInt(elementDeviceMode.value, 10);
-    });
+	elementDeviceMode.addEventListener("change", () => {
+		userSettings.deviceMode = parseInt(elementDeviceMode.value, 10);
+	});
 
     const elementEnableAnalog = document.getElementById("checkbox-analogEnabled");
     if (!elementEnableAnalog) {
@@ -497,6 +516,7 @@ export const UI = {
         const elementProfileId = document.getElementById("dropdown-profileId");
         const elementPlayerIdx = document.getElementById("dropdown-playerIdx");
         const elementDeviceMode = document.getElementById("dropdown-deviceMode");
+		uiUpdateDeviceModeOptions(userSettings);
     
         if (elementProfileId) {
             elementProfileId.value = userSettings.profile.profileId;

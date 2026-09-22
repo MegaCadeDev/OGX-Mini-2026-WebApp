@@ -19,44 +19,58 @@ export class UserSettings {
     });
 
     static DEVICE_MODE_OPTIONS = Object.freeze({
-        key: "deviceMode", 
-        def: 100, 
-        fields: [
-            { label: "Xbox OG",                  value: 1 },
-            { label: "Xbox OG: Steel Battalion", value: 2 },
-            { label: "Xbox OG: XRemote",         value: 3 },
-            { label: "XInput",                   value: 4 },
-            { label: "PS3",                      value: 5 },
-            { label: "DInput",                   value: 6 },
-            { label: "PS Classic",               value: 7 },
-            { label: "Switch",                   value: 8 },
-            { label: "WebApp",                   value: 100 },
-        ]
-    });
+		key: "deviceMode",
+		def: 100,
+		fields: [
+			{ label: "Xbox OG",                  value: 1 },
+			{ label: "Xbox OG: Steel Battalion", value: 2 },
+			{ label: "Xbox OG: XRemote",         value: 3 },
+			{ label: "XInput",                   value: 4 },
+			{ label: "PS3",                      value: 5 },
+			{ label: "DInput",                   value: 6 },
+			{ label: "PS Classic",               value: 7 },
+			{ label: "Switch",                   value: 8 },
+			{ label: "Wii U",                    value: 9 },
+			{ label: "Wii",                      value: 10 },
+			{ label: "PS1/PS2",                  value: 11 },
+			{ label: "GameCube",                 value: 12 },
+			{ label: "Dreamcast",                value: 13 },
+			{ label: "N64",                      value: 14 },
+			{ label: "PS4",                      value: 15 },
+			{ label: "Steam",                    value: 16 },
+			{ label: "WebApp",                   value: 100 },
+		]
+	});
 
     static DEVICE_MODE_OPTIONS_MULTI_GP = Object.freeze({
-        key: "deviceMode",
-        def: 100,
-        fields: [
-            { label: "DInput", value: 6 },
-            { label: "Switch", value: 8 },
-            { label: "WebApp", value: 100 },
-        ]
-    });
+		key: "deviceMode",
+		def: 100,
+		fields: [
+			{ label: "DInput", value: 6 },
+			{ label: "Switch", value: 8 },
+			{ label: "Wii U",  value: 9 },
+			{ label: "Wii",    value: 10 },
+			{ label: "WebApp", value: 100 },
+		]
+	});
 
-    static DEVICE_MODE_OPTIONS_4CH = Object.freeze({
-        key: "deviceMode",
-        def: 100,
-        fields: [
-            { label: "Xbox OG",                  value: 1 },
-            { label: "Xbox OG: Steel Battalion", value: 2 },
-            { label: "Xbox OG: XRemote",         value: 3 },
-            { label: "XInput",                   value: 4 },
-            { label: "PS3",                      value: 5 },
-            { label: "PS Classic",               value: 7 },
-            { label: "WebApp",                   value: 100 },
-        ]
-    });
+	static DEVICE_MODE_OPTIONS_4CH = Object.freeze({
+		key: "deviceMode",
+		def: 100,
+		fields: [
+			{ label: "Xbox OG",                  value: 1 },
+			{ label: "Xbox OG: Steel Battalion", value: 2 },
+			{ label: "Xbox OG: XRemote",         value: 3 },
+			{ label: "XInput",                   value: 4 },
+			{ label: "PS3",                      value: 5 },
+			{ label: "PS Classic",               value: 7 },
+			{ label: "Wii U",                    value: 9 },
+			{ label: "Wii",                      value: 10 },
+			{ label: "PS4",                      value: 15 },
+			{ label: "Steam",                    value: 16 },
+			{ label: "WebApp",                   value: 100 },
+		]
+	});
 
     static PROFILE_ID_OPTIONS = Object.freeze({ 
         key: "profile.profileId", 

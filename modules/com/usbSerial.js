@@ -155,11 +155,26 @@ class USBManager {
                 UI.updateAll(this.#userSettings);
                 break; 
 
-            case USBManager.#PACKET_ID.SET_GP_IN:
-                const gamepad = new Gamepad();
-                gamepad.setReportFromBytes(bufferIn.subarray(0, dataLen));
-                UI.drawGamepadInput(gamepad, this.#userSettings);
-                break;
+            case USBManager.#PACKET_ID.SET_GP_IN: {
+				const gamepad = new Gamepad();
+
+				// The current firmware's PadIn structure contains additional motion
+				// and touchpad data after the original 23-byte gamepad report.
+				// The WebApp currently visualizes only the legacy controller fields.
+				const gamepadReportLength = 23;
+
+				if (dataLen < gamepadReportLength) {
+					console.warn(`Invalid gamepad report length: ${dataLen}`);
+					break;
+				}
+
+				gamepad.setReportFromBytes(
+					bufferIn.subarray(0, gamepadReportLength)
+				);
+
+				UI.drawGamepadInput(gamepad, this.#userSettings);
+				break;
+			}
 
             default:
                 console.warn(`Unknown packet ID: ${header.packetId}`);
